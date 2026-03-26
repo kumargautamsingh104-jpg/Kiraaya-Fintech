@@ -1,0 +1,2 @@
+
+3f7d77d01627af3ab6a5e6d105cd6aca44552725	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/@isaacs/ttlcache/-/ttlcache-1.4.1.tgz","integrity":null,"time":1774547739993,"size":"0","metadata":{"time":1774547739993,"url":"http://registry.npmjs.org/@isaacs/ttlcache/-/ttlcache-1.4.1.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:41 GMT","location":"https://registry.npmjs.org/@isaacs/ttlcache/-/ttlcache-1.4.1.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

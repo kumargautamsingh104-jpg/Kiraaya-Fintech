@@ -1,0 +1,2 @@
+
+17dcd530c76194ee66bd16bba564f748476ba727	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/jose/-/jose-5.10.0.tgz","integrity":null,"time":1774547742205,"size":"0","metadata":{"time":1774547742205,"url":"http://registry.npmjs.org/jose/-/jose-5.10.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:43 GMT","location":"https://registry.npmjs.org/jose/-/jose-5.10.0.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

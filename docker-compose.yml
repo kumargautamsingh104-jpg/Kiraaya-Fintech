@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: kiraaya-db
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-kiraaya}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Redis Cache
+  redis:
+    image: redis:alpine
+    container_name: kiraaya-redis
+    ports:
+      - "6379:6379"
+
+  # API Service
+  api:
+    build:
+      context: .
+      dockerfile: apps/backend/Dockerfile
+    container_name: kiraaya-api
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@db:5432/${DB_NAME:-kiraaya}?schema=public
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET:-dev-token-secret}
+      FIELD_ENCRYPTION_KEY: ${FIELD_ENCRYPTION_KEY:-0123456789abcdef0123456789abcdef}
+    ports:
+      - "3001:3000"
+
+  # Web Portal
+  web:
+    build:
+      context: .
+      dockerfile: apps/landlord-portal/Dockerfile
+    container_name: kiraaya-web
+    depends_on:
+      - api
+    environment:
+      NEXT_PUBLIC_API_URL: http://api:3000
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres_data:

@@ -1,0 +1,2 @@
+
+2c9dbbebb6e637bb5a4bb5901fb27219c34c5aac	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz","integrity":null,"time":1774547738137,"size":"0","metadata":{"time":1774547738137,"url":"http://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:39 GMT","location":"https://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

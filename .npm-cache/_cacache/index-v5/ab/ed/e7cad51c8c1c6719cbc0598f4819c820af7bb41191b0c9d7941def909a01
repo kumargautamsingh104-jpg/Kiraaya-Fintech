@@ -1,0 +1,2 @@
+
+a74805e08c48a1b41eef8635b301c6723c737a2a	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/marky/-/marky-1.3.0.tgz","integrity":null,"time":1774547735940,"size":"0","metadata":{"time":1774547735940,"url":"http://registry.npmjs.org/marky/-/marky-1.3.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:37 GMT","location":"https://registry.npmjs.org/marky/-/marky-1.3.0.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

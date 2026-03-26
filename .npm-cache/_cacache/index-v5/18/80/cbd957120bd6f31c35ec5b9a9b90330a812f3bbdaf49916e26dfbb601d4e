@@ -1,0 +1,2 @@
+
+6ccd783b1dd12fdef98a80e7d5590ce52704c30f	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/text-decoder/-/text-decoder-1.2.7.tgz","integrity":null,"time":1774547734142,"size":"0","metadata":{"time":1774547734142,"url":"http://registry.npmjs.org/text-decoder/-/text-decoder-1.2.7.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:35 GMT","location":"https://registry.npmjs.org/text-decoder/-/text-decoder-1.2.7.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

@@ -1,0 +1,462 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────────
+
+enum UserRole {
+  tenant
+  landlord
+  admin
+}
+
+enum KycStatus {
+  none
+  pan_verified
+  full_kyc
+}
+
+enum Language {
+  en
+  hi
+}
+
+enum City {
+  bengaluru
+  delhi_ncr
+}
+
+enum TenancyType {
+  residential
+  commercial
+  pg
+}
+
+enum TenancyStatus {
+  active
+  closed
+  disputed
+}
+
+enum AgreementStatus {
+  draft
+  pending_sign_landlord
+  pending_sign_tenant
+  executed
+  expired
+}
+
+enum PaymentMethod {
+  upi
+  cash
+  bank_transfer
+  other
+}
+
+enum PaymentStatus {
+  pending
+  paid
+  missed
+  disputed
+  under_review
+}
+
+enum ScoreTier {
+  building
+  emerging
+  established
+  strong
+  prime
+}
+
+enum InsurancePlan {
+  standard
+  premium
+}
+
+enum PolicyStatus {
+  active
+  expired
+  claimed
+  cancelled
+}
+
+enum ClaimStatus {
+  initiated
+  under_review
+  approved
+  rejected
+  paid
+}
+
+enum ConsentPurpose {
+  rent_data_collection
+  score_computation
+  nbfc_data_share
+  insurer_data_share
+  aa_pull
+  marketing
+}
+
+enum DisputeStatus {
+  open
+  aa_resolving
+  human_review
+  resolved_tenant_favour
+  resolved_landlord_favour
+}
+
+enum PartnerType {
+  nbfc
+  insurer
+}
+
+enum ReferralType {
+  landlord_to_tenant
+  tenant_to_tenant
+}
+
+enum RewardStatus {
+  pending
+  paid
+}
+
+// ─────────────────────────────────────────────
+// CORE TABLES
+// ─────────────────────────────────────────────
+
+model User {
+  id                String     @id @default(uuid())
+  phone             String     @unique // not PII by itself
+  role              UserRole
+  // PII — encrypted AES-256-GCM at application layer
+  nameEncrypted     String?    @map("name_encrypted")
+  panEncrypted      String?    @map("pan_encrypted")
+  panLast4          String?    @db.Char(4) @map("pan_last4")
+  // Digio tokenised reference only — Aadhaar number NEVER stored
+  digioKycReference String?    @map("digio_kyc_reference")
+  kycStatus         KycStatus  @default(none) @map("kyc_status")
+  preferredLanguage Language   @default(en) @map("preferred_language")
+  deletionRequestedAt DateTime? @map("deletion_requested_at")
+  createdAt         DateTime   @default(now()) @map("created_at")
+  updatedAt         DateTime   @updatedAt @map("updated_at")
+
+  // Relations
+  properties          Property[]
+  tenantTenancies     Tenancy[]          @relation("TenantTenancies")
+  landlordTenancies   Tenancy[]          @relation("LandlordTenancies")
+  rentScores          RentScore[]
+  rentCertificates    RentCertificate[]
+  consents            Consent[]
+  shareLinks          ScoreShareLink[]
+  partnerApiLogs      PartnerApiLog[]
+  referralsMade       Referral[]         @relation("ReferralsMade")
+  referralsReceived   Referral[]         @relation("ReferralsReceived")
+  otpSessions         OtpSession[]
+
+  @@index([phone])
+  @@map("users")
+}
+
+model Property {
+  id             String   @id @default(uuid())
+  landlordId     String   @map("landlord_id")
+  landlord       User     @relation(fields: [landlordId], references: [id])
+  name           String
+  // encrypted at application layer
+  addressEncrypted String  @map("address_encrypted")
+  city           City
+  state          String
+  totalUnits     Int      @map("total_units")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  tenancies         Tenancy[]
+  insurancePolicies InsurancePolicy[]
+
+  @@map("properties")
+}
+
+model Tenancy {
+  id                  String        @id @default(uuid())
+  tenantId            String        @map("tenant_id")
+  tenant              User          @relation("TenantTenancies", fields: [tenantId], references: [id])
+  landlordId          String        @map("landlord_id")
+  landlord            User          @relation("LandlordTenancies", fields: [landlordId], references: [id])
+  propertyId          String        @map("property_id")
+  property            Property      @relation(fields: [propertyId], references: [id])
+  unitIdentifier      String        @map("unit_identifier") // "Flat 3B", "Bed 14"
+  tenancyType         TenancyType   @map("tenancy_type")
+  monthlyRentPaise    BigInt        @map("monthly_rent_paise")
+  securityDepositPaise BigInt?      @map("security_deposit_paise")
+  moveInDate          DateTime      @map("move_in_date") @db.Date
+  moveOutDate         DateTime?     @map("move_out_date") @db.Date
+  status              TenancyStatus @default(active)
+  createdAt           DateTime      @default(now()) @map("created_at")
+  updatedAt           DateTime      @updatedAt @map("updated_at")
+
+  agreement         RentalAgreement?
+  rentPayments      RentPayment[]
+  rentScores        RentScore[]
+  rentCertificates  RentCertificate[]
+  insuranceClaims   InsuranceClaim[]
+  disputes          PaymentDispute[]
+
+  @@map("tenancies")
+}
+
+model RentalAgreement {
+  id                String          @id @default(uuid())
+  tenancyId         String          @unique @map("tenancy_id")
+  tenancy           Tenancy         @relation(fields: [tenancyId], references: [id])
+  templateVersion   String          @map("template_version") // "KA_v1", "DL_v1"
+  customClauses     String?         @map("custom_clauses")
+  digioDocumentId   String?         @map("digio_document_id")
+  status            AgreementStatus @default(draft)
+  stampDutyPaise    BigInt?         @map("stamp_duty_paise")
+  agreementFeePaise BigInt?         @map("agreement_fee_paise") // 49900 (KA) or 59900 (DL)
+  s3Key             String?         @map("s3_key")
+  executedAt        DateTime?       @map("executed_at")
+  expiryDate        DateTime?       @map("expiry_date") @db.Date
+  razorpayPaymentId String?         @map("razorpay_payment_id")
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
+
+  @@map("rental_agreements")
+}
+
+model RentPayment {
+  id                  String        @id @default(uuid())
+  tenancyId           String        @map("tenancy_id")
+  tenancy             Tenancy       @relation(fields: [tenancyId], references: [id])
+  tenantId            String        @map("tenant_id")
+  landlordId          String        @map("landlord_id")
+  periodMonth         Int           @map("period_month") // 1–12
+  periodYear          Int           @map("period_year")
+  amountPaise         BigInt        @map("amount_paise")
+  dueDate             DateTime      @map("due_date") @db.Date
+  paidAt              DateTime?     @map("paid_at")
+  paymentMethod       PaymentMethod? @map("payment_method")
+  razorpayPaymentId   String?       @map("razorpay_payment_id")
+  razorpayOrderId     String?       @map("razorpay_order_id")
+  landlordConfirmed   Boolean       @default(false) @map("landlord_confirmed")
+  aaVerified          Boolean       @default(false) @map("aa_verified")
+  // AA derived outputs ONLY — never raw bank statement
+  aaDebitAmountPaise  BigInt?       @map("aa_debit_amount_paise")
+  aaDebitDate         DateTime?     @map("aa_debit_date") @db.Date
+  verificationScore   Int?          @map("verification_score") // 0–100
+  daysLate            Int?          @map("days_late") // NULL=missed, 0=ontime, neg=early
+  status              PaymentStatus @default(pending)
+  createdAt           DateTime      @default(now()) @map("created_at")
+  updatedAt           DateTime      @updatedAt @map("updated_at")
+
+  disputes PaymentDispute[]
+
+  @@unique([tenancyId, periodMonth, periodYear])
+  @@index([tenancyId])
+  @@index([status])
+  @@map("rent_payments")
+}
+
+model RentScore {
+  id                    String     @id @default(uuid())
+  tenantId              String     @map("tenant_id")
+  tenant                User       @relation(fields: [tenantId], references: [id])
+  tenancyId             String     @map("tenancy_id")
+  tenancy               Tenancy    @relation(fields: [tenancyId], references: [id])
+  score                 Int        // 300–900
+  tier                  ScoreTier
+  consistencyPct        Decimal    @map("consistency_pct") @db.Decimal(5, 2)
+  tenureMonths          Int        @map("tenure_months")
+  paymentMethodQuality  Decimal    @map("payment_method_quality") @db.Decimal(5, 2)
+  dataCompletenessPct   Decimal    @map("data_completeness_pct") @db.Decimal(5, 2)
+  totalPaymentsDue      Int        @map("total_payments_due")
+  onTimePayments        Int        @map("on_time_payments")
+  verifiedUpiPayments   Int        @map("verified_upi_payments")
+  cashPayments          Int        @map("cash_payments")
+  isLimitedData         Boolean    @default(false) @map("is_limited_data")
+  computedAt            DateTime   @default(now()) @map("computed_at")
+  version               String     @default("v1")
+
+  @@map("rent_scores")
+}
+
+model ScoreShareLink {
+  id        String   @id @default(uuid())
+  tenantId  String   @map("tenant_id")
+  tenant    User     @relation(fields: [tenantId], references: [id])
+  token     String   @unique @db.VarChar(64)
+  expiresAt DateTime @map("expires_at") // 30-day validity
+  viewCount Int      @default(0) @map("view_count")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("score_share_links")
+}
+
+model RentCertificate {
+  id                String   @id @default(uuid())
+  tenantId          String   @map("tenant_id")
+  tenant            User     @relation(fields: [tenantId], references: [id])
+  tenancyId         String   @map("tenancy_id")
+  tenancy           Tenancy  @relation(fields: [tenancyId], references: [id])
+  s3Key             String   @map("s3_key")
+  verificationToken String   @unique @db.VarChar(32) @map("verification_token")
+  generatedAt       DateTime @default(now()) @map("generated_at")
+
+  @@map("rent_certificates")
+}
+
+model InsurancePolicy {
+  id                String       @id @default(uuid())
+  landlordId        String       @map("landlord_id")
+  propertyId        String       @map("property_id")
+  property          Property     @relation(fields: [propertyId], references: [id])
+  insurerName       String       @map("insurer_name")
+  plan              InsurancePlan
+  premiumPaise      BigInt       @map("premium_paise")
+  unitsCovered      Int          @map("units_covered")
+  policyNumber      String?      @map("policy_number")
+  policyStart       DateTime     @map("policy_start") @db.Date
+  policyEnd         DateTime     @map("policy_end") @db.Date
+  status            PolicyStatus @default(active)
+  razorpayPaymentId String?      @map("razorpay_payment_id")
+  s3PolicyKey       String?      @map("s3_policy_key")
+  createdAt         DateTime     @default(now()) @map("created_at")
+  updatedAt         DateTime     @updatedAt @map("updated_at")
+
+  claims InsuranceClaim[]
+
+  @@map("insurance_policies")
+}
+
+model InsuranceClaim {
+  id               String      @id @default(uuid())
+  policyId         String      @map("policy_id")
+  policy           InsurancePolicy @relation(fields: [policyId], references: [id])
+  tenancyId        String      @map("tenancy_id")
+  tenancy          Tenancy     @relation(fields: [tenancyId], references: [id])
+  claimAmountPaise BigInt      @map("claim_amount_paise")
+  status           ClaimStatus @default(initiated)
+  documentsS3Keys  String[]    @map("documents_s3_keys")
+  initiatedAt      DateTime    @default(now()) @map("initiated_at")
+  resolvedAt       DateTime?   @map("resolved_at")
+  resolutionNotes  String?     @map("resolution_notes")
+
+  @@map("insurance_claims")
+}
+
+model Consent {
+  id         String         @id @default(uuid())
+  userId     String         @map("user_id")
+  user       User           @relation(fields: [userId], references: [id])
+  purpose    ConsentPurpose
+  granted    Boolean
+  grantedAt  DateTime?      @map("granted_at")
+  revokedAt  DateTime?      @map("revoked_at")
+  ipAddress  String?        @map("ip_address")
+  userAgent  String?        @map("user_agent")
+  createdAt  DateTime       @default(now()) @map("created_at")
+
+  partnerApiLogs PartnerApiLog[]
+
+  @@unique([userId, purpose])
+  @@map("consents")
+}
+
+/// Immutable audit log — never DELETE, never UPDATE
+model EventsLog {
+  id         String   @id @default(uuid())
+  entityType String   @map("entity_type") // 'rent_payment', 'user', 'consent', etc
+  entityId   String?  @map("entity_id")   // nulled on DPDP account deletion
+  actorId    String?  @map("actor_id")
+  actorRole  String?  @map("actor_role")
+  action     String   // 'payment.created', 'consent.revoked', etc
+  payload    Json?    // sanitised — no raw PII
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("events_log")
+}
+
+model Partner {
+  id                String      @id @default(uuid())
+  name              String
+  type              PartnerType
+  apiKeyHash        String      @map("api_key_hash") // bcrypt of API key
+  rateLimitPerHour  Int         @default(1000) @map("rate_limit_per_hour")
+  active            Boolean     @default(true)
+  createdAt         DateTime    @default(now()) @map("created_at")
+  updatedAt         DateTime    @updatedAt @map("updated_at")
+
+  apiLogs PartnerApiLog[]
+
+  @@map("partners")
+}
+
+model PartnerApiLog {
+  id         String    @id @default(uuid())
+  partnerId  String    @map("partner_id")
+  partner    Partner   @relation(fields: [partnerId], references: [id])
+  endpoint   String
+  userId     String?   @map("user_id") // whose data was accessed
+  user       User?     @relation(fields: [userId], references: [id])
+  consentId  String?   @map("consent_id")
+  consent    Consent?  @relation(fields: [consentId], references: [id])
+  calledAt   DateTime  @default(now()) @map("called_at")
+
+  @@map("partner_api_logs")
+}
+
+model PaymentDispute {
+  id               String        @id @default(uuid())
+  paymentId        String        @map("payment_id")
+  payment          RentPayment   @relation(fields: [paymentId], references: [id])
+  raisedById       String        @map("raised_by_id")
+  tenancy          Tenancy       @relation(fields: [tenancyId], references: [id])
+  tenancyId        String        @map("tenancy_id")
+  proofS3Keys      String[]      @map("proof_s3_keys")
+  aaCheckResult    Json?         @map("aa_check_result")
+  status           DisputeStatus @default(open)
+  resolutionNotes  String?       @map("resolution_notes")
+  createdAt        DateTime      @default(now()) @map("created_at")
+  resolvedAt       DateTime?     @map("resolved_at")
+
+  @@map("payment_disputes")
+}
+
+model OtpSession {
+  id         String    @id @default(uuid())
+  phone      String
+  userId     String?   @map("user_id")
+  user       User?     @relation(fields: [userId], references: [id])
+  otpHash    String    @map("otp_hash") // bcrypt of 6-digit OTP
+  attempts   Int       @default(0)
+  expiresAt  DateTime  @map("expires_at")
+  verifiedAt DateTime? @map("verified_at")
+  createdAt  DateTime  @default(now()) @map("created_at")
+
+  @@map("otp_sessions")
+}
+
+model Referral {
+  id             String       @id @default(uuid())
+  referralCode   String       @unique @db.VarChar(12) @map("referral_code")
+  referredById   String       @map("referred_by_id")
+  referredBy     User         @relation("ReferralsMade", fields: [referredById], references: [id])
+  referredUserId String?      @map("referred_user_id")
+  referredUser   User?        @relation("ReferralsReceived", fields: [referredUserId], references: [id])
+  type           ReferralType
+  rewardStatus   RewardStatus @default(pending) @map("reward_status")
+  createdAt      DateTime     @default(now()) @map("created_at")
+
+  @@map("referrals")
+}

@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "Kiraaya",
+    "slug": "kiraaya",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "scheme": "kiraaya",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0F6E56"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "in.kiraaya.app",
+      "buildNumber": "1"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0F6E56"
+      },
+      "package": "in.kiraaya.app",
+      "versionCode": 1,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECEIVE_SMS",
+        "android.permission.READ_SMS"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-notifications",
+      [
+        "expo-camera",
+        { "cameraPermission": "Kiraaya needs camera access for Aadhaar e-KYC face verification." }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

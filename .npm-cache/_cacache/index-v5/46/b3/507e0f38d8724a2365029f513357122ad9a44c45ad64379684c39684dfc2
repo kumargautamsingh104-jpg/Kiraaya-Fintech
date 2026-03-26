@@ -1,0 +1,2 @@
+
+9db9be9f55c0f3d8a4d3e07bec19562dd3b92ac5	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/mrmime/-/mrmime-1.0.1.tgz","integrity":null,"time":1774547739511,"size":"0","metadata":{"time":1774547739511,"url":"http://registry.npmjs.org/mrmime/-/mrmime-1.0.1.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:40 GMT","location":"https://registry.npmjs.org/mrmime/-/mrmime-1.0.1.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

@@ -1,0 +1,2 @@
+
+26a2bc5a04dfac0151a7313c1e2284562b7568aa	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/scheduler/-/scheduler-0.23.2.tgz","integrity":null,"time":1774547746209,"size":"0","metadata":{"time":1774547746209,"url":"http://registry.npmjs.org/scheduler/-/scheduler-0.23.2.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:47 GMT","location":"https://registry.npmjs.org/scheduler/-/scheduler-0.23.2.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

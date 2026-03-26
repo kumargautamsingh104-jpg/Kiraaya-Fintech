@@ -1,0 +1,2 @@
+
+084070eb56cedbc3ce23e18b122e848cd8e64ccf	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/@babel/register/-/register-7.28.6.tgz","integrity":null,"time":1774547736131,"size":"0","metadata":{"time":1774547736131,"url":"http://registry.npmjs.org/@babel/register/-/register-7.28.6.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:37 GMT","location":"https://registry.npmjs.org/@babel/register/-/register-7.28.6.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

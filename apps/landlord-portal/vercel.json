@@ -1,0 +1,9 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "cd ../.. && npx turbo build --filter=@kiraaya/web...",
+  "installCommand": "cd ../.. && npm install --ignore-scripts",
+  "outputDirectory": ".next",
+  "env": {
+    "NEXT_PUBLIC_API_URL": "@next_public_api_url"
+  }
+}

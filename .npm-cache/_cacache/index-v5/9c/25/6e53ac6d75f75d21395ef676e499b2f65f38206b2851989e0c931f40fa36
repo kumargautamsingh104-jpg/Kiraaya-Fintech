@@ -1,0 +1,2 @@
+
+ffd509301c54bd0cd1dc3c8d711bdc003c6b9265	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/buffer-alloc/-/buffer-alloc-1.2.0.tgz","integrity":null,"time":1774547735738,"size":"0","metadata":{"time":1774547735738,"url":"http://registry.npmjs.org/buffer-alloc/-/buffer-alloc-1.2.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:36 GMT","location":"https://registry.npmjs.org/buffer-alloc/-/buffer-alloc-1.2.0.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

@@ -1,0 +1,2 @@
+
+f263193278ae21d4fd1d8aac187a9b112bc4a2e6	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/expect/-/expect-29.7.0.tgz","integrity":null,"time":1774547739581,"size":"0","metadata":{"time":1774547739581,"url":"http://registry.npmjs.org/expect/-/expect-29.7.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:40 GMT","location":"https://registry.npmjs.org/expect/-/expect-29.7.0.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

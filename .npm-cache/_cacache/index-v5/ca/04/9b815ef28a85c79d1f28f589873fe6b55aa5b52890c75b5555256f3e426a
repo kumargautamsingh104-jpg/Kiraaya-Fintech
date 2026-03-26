@@ -1,0 +1,2 @@
+
+bbadba6bd4f624b8555213b6c5efce5edb95bfb2	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/graphql/-/graphql-15.8.0.tgz","integrity":null,"time":1774547738465,"size":"0","metadata":{"time":1774547738465,"url":"http://registry.npmjs.org/graphql/-/graphql-15.8.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:39 GMT","location":"https://registry.npmjs.org/graphql/-/graphql-15.8.0.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

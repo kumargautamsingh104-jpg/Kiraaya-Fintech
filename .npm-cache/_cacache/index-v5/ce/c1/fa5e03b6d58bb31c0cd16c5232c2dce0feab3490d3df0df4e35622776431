@@ -1,0 +1,2 @@
+
+089b7f539755ece1222bccffe8524d36bc8ad9ff	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/goober/-/goober-2.1.18.tgz","integrity":null,"time":1774547734586,"size":"0","metadata":{"time":1774547734586,"url":"http://registry.npmjs.org/goober/-/goober-2.1.18.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:35 GMT","location":"https://registry.npmjs.org/goober/-/goober-2.1.18.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

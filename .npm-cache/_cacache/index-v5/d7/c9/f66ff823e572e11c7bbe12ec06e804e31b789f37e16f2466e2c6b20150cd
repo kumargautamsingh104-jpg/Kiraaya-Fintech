@@ -1,0 +1,2 @@
+
+e59cbe891d0146d289c76272227c486c6143c952	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/globalthis/-/globalthis-1.0.4.tgz","integrity":null,"time":1774547733948,"size":"0","metadata":{"time":1774547733948,"url":"http://registry.npmjs.org/globalthis/-/globalthis-1.0.4.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:35 GMT","location":"https://registry.npmjs.org/globalthis/-/globalthis-1.0.4.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

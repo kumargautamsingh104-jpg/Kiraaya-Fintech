@@ -1,0 +1,91 @@
+{
+  "translation": {
+    "home": {
+      "greeting": "Hello, {{name}}",
+      "scoreTitle": "Your RentScore",
+      "streakLabel": "{{months}} months paid on time in a row",
+      "building": "Building your score...",
+      "buildingHint": "Pay rent on time for {{needed}} more months to see your RentScore",
+      "payNow": "Pay Rent",
+      "viewCertificate": "View Certificate",
+      "shareScore": "Share Score",
+      "rentDue": "Rent due in {{days}} days",
+      "rentOverdue": "Rent {{days}} days overdue",
+      "rentPaid": "Rent paid this month ✓"
+    },
+    "payments": {
+      "title": "Payments",
+      "currentMonth": "This Month",
+      "history": "Payment History",
+      "payNow": "Pay ₹{{amount}} Now",
+      "paid": "Paid",
+      "missed": "Missed",
+      "pending": "Due",
+      "daysEarly": "{{days}} days early",
+      "daysLate": "{{days}} days late",
+      "onTime": "On time",
+      "logCash": "I paid in cash",
+      "downloadReceipt": "Download Receipt",
+      "upiIcon": "UPI",
+      "cashIcon": "Cash"
+    },
+    "documents": {
+      "title": "Documents",
+      "agreement": "Rental Agreement",
+      "certificate": "Rent Certificate",
+      "share": "Share Certificate",
+      "download": "Download PDF",
+      "issued": "Issued {{date}}",
+      "verifyQR": "Scan QR to verify"
+    },
+    "score": {
+      "title": "Score Details",
+      "consistency": "Payment Consistency",
+      "tenure": "Rental Tenure",
+      "paymentQuality": "Payment Quality",
+      "dataCompleteness": "Data Completeness",
+      "history": "Score History",
+      "shareLink": "Share my RentScore",
+      "limitedData": "Limited data — more than 50% cash payments",
+      "disputePayment": "This looks wrong. I paid this.",
+      "factors": "What affects your score"
+    },
+    "profile": {
+      "title": "Profile",
+      "kycStatus": "KYC Status",
+      "consents": "Data Consents",
+      "revokeConsent": "Revoke",
+      "exportData": "Download My Data",
+      "deleteAccount": "Delete Account",
+      "deleteConfirm": "Your account and all data will be permanently deleted within 30 days.",
+      "language": "Language",
+      "notifications": "Notifications"
+    },
+    "onboarding": {
+      "welcome": "Welcome to Kiraaya",
+      "tagline": "Your rent. Your credit.",
+      "phoneLabel": "Mobile Number",
+      "phonePlaceholder": "Enter 10-digit mobile number",
+      "otpLabel": "Enter OTP",
+      "otpHint": "6-digit code sent to {{phone}}",
+      "panLabel": "PAN Number",
+      "panHint": "Required to verify your identity",
+      "next": "Continue",
+      "skip": "Skip for now",
+      "cameraPermission": "We need camera access for Aadhaar e-KYC face verification. This is secure and encrypted.",
+      "notificationPermission": "Allow notifications to get rent due reminders and score updates.",
+      "step": "Step {{current}} of {{total}}"
+    },
+    "common": {
+      "loading": "Loading...",
+      "error": "Something went wrong. Please try again.",
+      "retry": "Retry",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "save": "Save",
+      "back": "Back",
+      "close": "Close",
+      "rupees": "₹{{amount}}"
+    }
+  }
+}

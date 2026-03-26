@@ -1,0 +1,2 @@
+
+382f2d8f2ae30bb58ddcde36b07f050a70c62273	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/@jest/schemas/-/schemas-29.6.3.tgz","integrity":null,"time":1774547740510,"size":"0","metadata":{"time":1774547740510,"url":"http://registry.npmjs.org/@jest/schemas/-/schemas-29.6.3.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:41 GMT","location":"https://registry.npmjs.org/@jest/schemas/-/schemas-29.6.3.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

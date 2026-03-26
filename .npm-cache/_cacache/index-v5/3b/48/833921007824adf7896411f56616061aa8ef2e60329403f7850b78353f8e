@@ -1,0 +1,2 @@
+
+b724820453bdd09ff70c91df9c880dc9d87384ee	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/tempy/-/tempy-0.7.1.tgz","integrity":null,"time":1774547738131,"size":"0","metadata":{"time":1774547738131,"url":"http://registry.npmjs.org/tempy/-/tempy-0.7.1.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:39 GMT","location":"https://registry.npmjs.org/tempy/-/tempy-0.7.1.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

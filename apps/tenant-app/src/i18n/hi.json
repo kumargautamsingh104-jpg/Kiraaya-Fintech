@@ -1,0 +1,91 @@
+{
+  "translation": {
+    "home": {
+      "greeting": "नमस्ते, {{name}}",
+      "scoreTitle": "आपका रेंटस्कोर",
+      "streakLabel": "{{months}} महीने लगातार समय पर भुगतान",
+      "building": "स्कोर बन रहा है...",
+      "buildingHint": "अपना रेंटस्कोर देखने के लिए {{needed}} और महीने समय पर किराया दें",
+      "payNow": "किराया दें",
+      "viewCertificate": "सर्टिफिकेट देखें",
+      "shareScore": "स्कोर शेयर करें",
+      "rentDue": "{{days}} दिन में किराया देना है",
+      "rentOverdue": "किराया {{days}} दिन से बकाया",
+      "rentPaid": "इस महीने किराया दे दिया ✓"
+    },
+    "payments": {
+      "title": "भुगतान",
+      "currentMonth": "इस महीने",
+      "history": "भुगतान इतिहास",
+      "payNow": "₹{{amount}} अभी दें",
+      "paid": "दे दिया",
+      "missed": "छूट गया",
+      "pending": "देना है",
+      "daysEarly": "{{days}} दिन पहले",
+      "daysLate": "{{days}} दिन देरी से",
+      "onTime": "समय पर",
+      "logCash": "मैंने नकद दिया",
+      "downloadReceipt": "रसीद डाउनलोड करें",
+      "upiIcon": "UPI",
+      "cashIcon": "नकद"
+    },
+    "documents": {
+      "title": "दस्तावेज़",
+      "agreement": "किराया समझौता",
+      "certificate": "किराया सर्टिफिकेट",
+      "share": "सर्टिफिकेट शेयर करें",
+      "download": "PDF डाउनलोड करें",
+      "issued": "{{date}} को जारी",
+      "verifyQR": "सत्यापन के लिए QR स्कैन करें"
+    },
+    "score": {
+      "title": "स्कोर विवरण",
+      "consistency": "भुगतान नियमितता",
+      "tenure": "किरायेदारी अवधि",
+      "paymentQuality": "भुगतान की गुणवत्ता",
+      "dataCompleteness": "डेटा पूर्णता",
+      "history": "स्कोर इतिहास",
+      "shareLink": "मेरा रेंटस्कोर शेयर करें",
+      "limitedData": "सीमित डेटा — 50% से अधिक नकद भुगतान",
+      "disputePayment": "यह गलत है। मैंने यह भुगतान किया था।",
+      "factors": "आपके स्कोर को क्या प्रभावित करता है"
+    },
+    "profile": {
+      "title": "प्रोफ़ाइल",
+      "kycStatus": "KYC स्थिति",
+      "consents": "डेटा सहमति",
+      "revokeConsent": "रद्द करें",
+      "exportData": "मेरा डेटा डाउनलोड करें",
+      "deleteAccount": "खाता हटाएं",
+      "deleteConfirm": "आपका खाता और सभी डेटा 30 दिनों के भीतर स्थायी रूप से हटा दिया जाएगा।",
+      "language": "भाषा",
+      "notifications": "सूचनाएं"
+    },
+    "onboarding": {
+      "welcome": "किराया में आपका स्वागत है",
+      "tagline": "आपका किराया। आपका क्रेडिट।",
+      "phoneLabel": "मोबाइल नंबर",
+      "phonePlaceholder": "10 अंकों का मोबाइल नंबर दर्ज करें",
+      "otpLabel": "OTP दर्ज करें",
+      "otpHint": "{{phone}} पर भेजा गया 6-अंकीय कोड",
+      "panLabel": "PAN नंबर",
+      "panHint": "आपकी पहचान सत्यापित करने के लिए आवश्यक",
+      "next": "जारी रखें",
+      "skip": "अभी छोड़ें",
+      "cameraPermission": "आधार e-KYC फेस सत्यापन के लिए हमें कैमरा की अनुमति चाहिए। यह सुरक्षित और एन्क्रिप्टेड है।",
+      "notificationPermission": "किराया अनुस्मारक और स्कोर अपडेट पाने के लिए सूचनाओं की अनुमति दें।",
+      "step": "चरण {{current}} / {{total}}"
+    },
+    "common": {
+      "loading": "लोड हो रहा है...",
+      "error": "कुछ गड़बड़ हुई। कृपया फिर कोशिश करें।",
+      "retry": "फिर कोशिश करें",
+      "cancel": "रद्द करें",
+      "confirm": "पुष्टि करें",
+      "save": "सहेजें",
+      "back": "वापस",
+      "close": "बंद करें",
+      "rupees": "₹{{amount}}"
+    }
+  }
+}
