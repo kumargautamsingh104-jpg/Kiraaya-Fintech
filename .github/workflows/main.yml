@@ -31,14 +31,45 @@ jobs:
       - name: Build
         run: npx turbo build
 
-  deploy:
-    name: Deploy to ECS
+  deploy-render:
+    name: Deploy to Render
     needs: build
     if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render Deploy
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_WEBHOOK_URL }}
+
+  deploy-aws:
+    name: Deploy to AWS ECS
+    needs: build
+    if: github.ref == 'refs/heads/main' && false # Set to true when AWS is ready
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Add AWS credentials and ECS deployment steps here
-      # For now, we have the Dockerfiles ready for any CI tool
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push images
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          docker build -t $ECR_REGISTRY/kiraaya-api:latest -f apps/backend/Dockerfile .
+          docker push $ECR_REGISTRY/kiraaya-api:latest
+          docker build -t $ECR_REGISTRY/kiraaya-web:latest -f apps/landlord-portal/Dockerfile .
+          docker push $ECR_REGISTRY/kiraaya-web:latest
+
+      - name: Update ECS service
+        run: |
+          aws ecs update-service --cluster kiraaya-cluster --service kiraaya-api --force-new-deployment
+          aws ecs update-service --cluster kiraaya-cluster --service kiraaya-web --force-new-deployment
