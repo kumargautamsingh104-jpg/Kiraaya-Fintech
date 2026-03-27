@@ -1,2 +1,0 @@
-
-cf60e6a5281f2e312bc79a197defc530125df887	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/unique-slug/-/unique-slug-4.0.0.tgz","integrity":null,"time":1774547733661,"size":"0","metadata":{"time":1774547733661,"url":"http://registry.npmjs.org/unique-slug/-/unique-slug-4.0.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:34 GMT","location":"https://registry.npmjs.org/unique-slug/-/unique-slug-4.0.0.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

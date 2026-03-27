@@ -1,2 +1,0 @@
-
-b1fc93c9efd5fb7ad6d022274fe1c60c056119ec	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/regjsgen/-/regjsgen-0.8.0.tgz","integrity":null,"time":1774547734480,"size":"0","metadata":{"time":1774547734480,"url":"http://registry.npmjs.org/regjsgen/-/regjsgen-0.8.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:35 GMT","location":"https://registry.npmjs.org/regjsgen/-/regjsgen-0.8.0.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

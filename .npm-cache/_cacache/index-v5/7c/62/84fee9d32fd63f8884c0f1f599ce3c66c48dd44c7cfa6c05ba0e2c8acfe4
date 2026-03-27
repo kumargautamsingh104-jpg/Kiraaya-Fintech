@@ -1,2 +1,0 @@
-
-bbef5c7d6b6399f347f32b75d8702c5691945505	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/jest-mock/-/jest-mock-29.7.0.tgz","integrity":null,"time":1774547736589,"size":"0","metadata":{"time":1774547736589,"url":"http://registry.npmjs.org/jest-mock/-/jest-mock-29.7.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:37 GMT","location":"https://registry.npmjs.org/jest-mock/-/jest-mock-29.7.0.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

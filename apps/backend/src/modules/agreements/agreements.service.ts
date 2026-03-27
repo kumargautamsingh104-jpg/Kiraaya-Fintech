@@ -9,6 +9,12 @@ export class AgreementsService {
 
     if (!tenancy) throw new Error('Tenancy not found');
 
+    // PRD §2.2: MTA Compliance - Security Deposit Cap (max 2x monthly rent for residential)
+    // Assuming tenancy.rentPaise and tenancy.securityDepositPaise are available
+    if (tenancy.securityDepositPaise > (tenancy.rentAmountPaise * 2)) {
+       throw new Error('MTA VIOLATION: Security Deposit cannot exceed 2x monthly rent for residential properties');
+    }
+
     const agreement = await db.rentalAgreement.create({
       data: {
         tenancyId,

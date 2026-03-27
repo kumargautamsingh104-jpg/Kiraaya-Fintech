@@ -1,2 +1,0 @@
-
-7c55e32cb6fa7d6df0626ce35c4856ef6ab7fbcf	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/lru-cache/-/lru-cache-5.1.1.tgz","integrity":null,"time":1774547741224,"size":"0","metadata":{"time":1774547741224,"url":"http://registry.npmjs.org/lru-cache/-/lru-cache-5.1.1.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:42 GMT","location":"https://registry.npmjs.org/lru-cache/-/lru-cache-5.1.1.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

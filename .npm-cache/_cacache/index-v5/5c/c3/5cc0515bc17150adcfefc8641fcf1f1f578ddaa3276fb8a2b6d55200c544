@@ -1,2 +1,0 @@
-
-046720f24b3546bcc9537e324e20de8203a513c6	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/@kiraaya%2fintegrations","integrity":null,"time":1774547500028,"size":"0","metadata":{"time":1774547500027,"url":"http://registry.npmjs.org/@kiraaya%2fintegrations","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:51:41 GMT","location":"https://registry.npmjs.org/@kiraaya%2Fintegrations","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

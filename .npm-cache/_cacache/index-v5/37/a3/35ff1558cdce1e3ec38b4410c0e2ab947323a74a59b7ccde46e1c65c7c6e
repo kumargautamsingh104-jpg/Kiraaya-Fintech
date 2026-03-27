@@ -1,2 +1,0 @@
-
-04b8133a95b2a0d7d824f5caeea852951da2d9bf	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/@kiraaya%2fscore-engine","integrity":null,"time":1774547499218,"size":"0","metadata":{"time":1774547499217,"url":"http://registry.npmjs.org/@kiraaya%2fscore-engine","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:51:40 GMT","location":"https://registry.npmjs.org/@kiraaya%2Fscore-engine","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

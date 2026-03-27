@@ -35,6 +35,29 @@ export default function LandlordDashboard() {
 
   useEffect(() => {
     async function load() {
+      // Check for preview mode in URL
+      const params = new URLSearchParams(window.location.search);
+      const isPreview = params.get('preview') === 'true';
+
+      if (isPreview) {
+        setStats({
+          totalUnits: 25,
+          occupiedUnits: 18,
+          collectedPaise: 45000000,
+          expectedPaise: 52000000,
+          overdueCount: 2,
+        });
+        setTenants([
+          { id: '1', name: 'Arun Vijay', unit: 'A-402', amountPaise: 2500000, status: 'paid' },
+          { id: '2', name: 'Sarayu K.', unit: 'B-105', amountPaise: 1800000, status: 'pending' },
+          { id: '3', name: 'Vikram Singh', unit: 'C-201', amountPaise: 3500000, status: 'missed' },
+        ]);
+        setProperties([{ id: 'p1', name: 'Lakeview Apartments', totalUnits: 15 }, { id: 'p2', name: 'Green Valley', totalUnits: 10 }]);
+        setIsPro(true);
+        setLoading(false);
+        return;
+      }
+
       try {
         const token = localStorage.getItem('kiraaya_token');
         if (!token) { router.push('/login'); return; }

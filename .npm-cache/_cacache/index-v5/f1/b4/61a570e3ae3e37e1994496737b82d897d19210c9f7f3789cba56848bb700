@@ -1,2 +1,0 @@
-
-d72ee6f7c69095ce2e35d4f88a14e3d874838134	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/internal-slot/-/internal-slot-1.1.0.tgz","integrity":null,"time":1774547733946,"size":"0","metadata":{"time":1774547733945,"url":"http://registry.npmjs.org/internal-slot/-/internal-slot-1.1.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:35 GMT","location":"https://registry.npmjs.org/internal-slot/-/internal-slot-1.1.0.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

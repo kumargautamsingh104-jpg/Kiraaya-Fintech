@@ -42,6 +42,11 @@ ios
 # Coverage
 coverage
 
+# Cache
+.npm-cache
+.turbo
+.next
+
 # Prisma
 prisma/migrations/*.sql.bak
 

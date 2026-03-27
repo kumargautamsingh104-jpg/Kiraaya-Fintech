@@ -1,2 +1,0 @@
-
-1662f8e8edda7d15059efd04ee61a95543296771	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/get-uri/-/get-uri-6.0.5.tgz","integrity":null,"time":1774547734707,"size":"0","metadata":{"time":1774547734707,"url":"http://registry.npmjs.org/get-uri/-/get-uri-6.0.5.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:35 GMT","location":"https://registry.npmjs.org/get-uri/-/get-uri-6.0.5.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

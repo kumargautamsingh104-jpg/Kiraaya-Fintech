@@ -1,2 +1,0 @@
-
-9632ef7fac22ceaad739819338fd2b31c34dcdab	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/@types/react/-/react-18.3.28.tgz","integrity":null,"time":1774547742206,"size":"0","metadata":{"time":1774547742206,"url":"http://registry.npmjs.org/@types/react/-/react-18.3.28.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:43 GMT","location":"https://registry.npmjs.org/@types/react/-/react-18.3.28.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

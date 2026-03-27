@@ -1,2 +1,0 @@
-
-c206618c9fe52d95c4dde21993ddd4ce2ab460d9	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/join-component/-/join-component-1.1.0.tgz","integrity":null,"time":1774547738078,"size":"0","metadata":{"time":1774547738078,"url":"http://registry.npmjs.org/join-component/-/join-component-1.1.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:39 GMT","location":"https://registry.npmjs.org/join-component/-/join-component-1.1.0.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

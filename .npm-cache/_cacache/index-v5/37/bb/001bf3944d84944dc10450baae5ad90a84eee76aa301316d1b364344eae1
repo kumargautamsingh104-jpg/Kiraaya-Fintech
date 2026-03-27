@@ -1,2 +1,0 @@
-
-b14edff55ca80e5271e23fd6c254d71d59decab0	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/anser/-/anser-1.4.10.tgz","integrity":null,"time":1774547741695,"size":"0","metadata":{"time":1774547741695,"url":"http://registry.npmjs.org/anser/-/anser-1.4.10.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:42 GMT","location":"https://registry.npmjs.org/anser/-/anser-1.4.10.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}

@@ -1,2 +1,0 @@
-
-53b89189a08302b1db1598868c5c45496e59b507	{"key":"make-fetch-happen:request-cache:http://registry.npmjs.org/react-native/-/react-native-0.84.1.tgz","integrity":null,"time":1774547746101,"size":"0","metadata":{"time":1774547746101,"url":"http://registry.npmjs.org/react-native/-/react-native-0.84.1.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/plain;charset=UTF-8","date":"Thu, 26 Mar 2026 17:55:47 GMT","location":"https://registry.npmjs.org/react-native/-/react-native-0.84.1.tgz","vary":"Accept-Encoding"},"options":{"compress":true},"status":301}}
