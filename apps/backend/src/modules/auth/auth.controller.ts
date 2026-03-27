@@ -1,19 +1,41 @@
-import { UserService } from './user.service';
+import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
+import { AuthService } from './auth.service';
 
-const userService = new UserService();
+const authService = new AuthService();
 
-export default async function handler(req: any, res: any) {
-  const { method, body } = req;
+const requestSchema = z.object({ phone: z.string().min(10).max(13) });
+const verifySchema = z.object({
+  phone: z.string().min(10).max(13),
+  otp: z.string().length(6),
+});
 
-  if (method === 'POST') {
+export class AuthController {
+  static async requestOTP(req: NextRequest): Promise<NextResponse> {
     try {
-      const { phone, role } = body;
-      const user = await userService.registerUser(phone, role);
-      return res.status(200).json({ success: true, data: user });
-    } catch (error: any) {
-      return res.status(500).json({ success: false, message: error.message });
+      const body = requestSchema.safeParse(await req.json());
+      if (!body.success) {
+        return NextResponse.json({ success: false, error: 'Invalid phone number' }, { status: 400 });
+      }
+
+      await authService.requestOtp(body.data.phone);
+      return NextResponse.json({ success: true, message: 'OTP sent' });
+    } catch (err: any) {
+      return NextResponse.json({ success: false, error: err.message }, { status: 500 });
     }
   }
 
-  return res.status(405).end();
+  static async verifyOTPAndLogin(req: NextRequest): Promise<NextResponse> {
+    try {
+      const body = verifySchema.safeParse(await req.json());
+      if (!body.success) {
+        return NextResponse.json({ success: false, error: 'Invalid input' }, { status: 400 });
+      }
+
+      const result = await authService.verifyOtpAndLogin(body.data.phone, body.data.otp);
+      return NextResponse.json({ success: true, data: result });
+    } catch (err: any) {
+      return NextResponse.json({ success: false, error: err.message }, { status: 400 });
+    }
+  }
 }

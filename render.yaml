@@ -1,13 +1,11 @@
 services:
-  # Backend API (Next.js)
+  # Kiraaya Backend API (Render Web Service)
   - type: web
     name: kiraaya-api
-    runtime: node
-    region: singapore
-    plan: free
-    rootDir: apps/backend
-    buildCommand: "cd ../.. && npm install --ignore-scripts && npx prisma generate --schema=packages/db/prisma/schema.prisma && npx turbo build --filter=@kiraaya/api..."
-    startCommand: "node apps/backend/.next/standalone/apps/backend/server.js"
+    runtime: docker
+    dockerContext: .
+    dockerfilePath: apps/backend/Dockerfile
+    plan: free # or starter
     envVars:
       - key: NODE_ENV
         value: production
@@ -15,16 +13,48 @@ services:
         fromDatabase:
           name: kiraaya-db
           property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: kiraaya-redis
+          property: connectionString
       - key: JWT_SECRET
         generateValue: true
       - key: FIELD_ENCRYPTION_KEY
         generateValue: true
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: RAZORPAY_WEBHOOK_SECRET
+        sync: false
+
+    healthCheckPath: /api/v1/health
+  # Kiraaya Landlord Portal
+  - type: web
+    name: kiraaya-landlord
+    runtime: docker
+    dockerContext: .
+    dockerfilePath: apps/landlord-portal/Dockerfile
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
       - key: NEXT_PUBLIC_API_URL
-        value: https://kiraaya-api.onrender.com
+        fromService:
+          type: web
+          name: kiraaya-api
+          property: url
+
+  # Redis for Caching
+  - type: redis
+    name: kiraaya-redis
+    plan: free
+    ipAllowList: [] # Only allow internal connections
 
 databases:
   - name: kiraaya-db
     plan: free
-    region: singapore
     databaseName: kiraaya
-    user: kiraaya_user
+    user: kiraaya_admin

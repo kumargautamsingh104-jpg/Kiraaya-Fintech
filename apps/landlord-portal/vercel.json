@@ -1,9 +1,7 @@
 {
   "framework": "nextjs",
-  "buildCommand": "cd ../.. && npx turbo build --filter=@kiraaya/web...",
-  "installCommand": "cd ../.. && npm install --ignore-scripts",
-  "outputDirectory": ".next",
+  "rootDirectory": "apps/landlord-portal",
   "env": {
-    "NEXT_PUBLIC_API_URL": "@next_public_api_url"
+    "NEXT_PUBLIC_API_URL": "https://kiraaya-api.onrender.com"
   }
 }

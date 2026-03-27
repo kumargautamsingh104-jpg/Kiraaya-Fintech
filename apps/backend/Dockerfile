@@ -31,17 +31,26 @@ RUN turbo build --filter=@kiraaya/api...
 # Step 4: Final runner
 FROM base AS runner
 WORKDIR /app
+
+ENV NODE_ENV production
+ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
+
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
+
+# Copy standalone output and static assets
+COPY --from=builder --chown=nextjs:nodejs /app/apps/backend/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/backend/.next/static ./apps/backend/.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/backend/public ./apps/backend/public
+COPY --from=builder --chown=nextjs:nodejs /app/apps/backend/start.sh ./start.sh
+
+# Ensure start script is executable
+RUN chmod +x ./start.sh
+
 USER nextjs
 
-COPY --from=builder /app/apps/backend/package.json ./package.json
-COPY --from=builder --chown=nextjs:nodejs /app/apps/backend/.next ./.next
-COPY --from=builder --chown=nextjs:nodejs /app/apps/backend/public ./public
-COPY --from=builder /app/node_modules ./node_modules
-
 EXPOSE 3000
-ENV PORT 3000
-ENV NODE_ENV production
 
-CMD ["npm", "start"]
+# Start using the custom script
+CMD ["./start.sh"]

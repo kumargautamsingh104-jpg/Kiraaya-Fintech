@@ -29,17 +29,22 @@ RUN turbo build --filter=@kiraaya/web...
 # Step 4: Final runner
 FROM base AS runner
 WORKDIR /app
+
+ENV NODE_ENV production
+ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
+
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
+
+# Copy standalone output and static assets
+COPY --from=builder --chown=nextjs:nodejs /app/apps/landlord-portal/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/landlord-portal/.next/static ./apps/landlord-portal/.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/landlord-portal/public ./apps/landlord-portal/public
+
 USER nextjs
 
-COPY --from=builder /app/apps/landlord-portal/package.json ./package.json
-COPY --from=builder --chown=nextjs:nodejs /app/apps/landlord-portal/.next ./.next
-COPY --from=builder --chown=nextjs:nodejs /app/apps/landlord-portal/public ./public
-COPY --from=builder /app/node_modules ./node_modules
-
 EXPOSE 3000
-ENV PORT 3000
-ENV NODE_ENV production
 
-CMD ["npm", "start"]
+# Start using the standalone server.js
+CMD ["node", "apps/landlord-portal/server.js"]

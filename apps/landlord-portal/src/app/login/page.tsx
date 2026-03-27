@@ -1,5 +1,5 @@
 import React from 'react';
-import { GoogleLoginButton } from '@/components/GoogleLoginButton';
+import { GoogleLoginButton } from '@kiraaya/ui';
 
 /**
  * Landlord Login Page (Step 11)

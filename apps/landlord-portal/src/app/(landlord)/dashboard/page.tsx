@@ -107,6 +107,9 @@ export default function LandlordDashboard() {
           </p>
         </div>
         <div style={{ display: 'flex', gap: 'var(--space-1)' }}>
+          <Link href="/properties/add" className="btn btn-secondary">
+            + Add Property
+          </Link>
           <Link href="/tenants/add" className="btn btn-primary">
             + Add Tenant
           </Link>

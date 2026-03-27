@@ -1,53 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { withAuth, AuthenticatedRequest } from '../../middleware/auth';
-import { verifyPAN, initAadhaarKYC } from '@kiraaya/integrations';
-import { db } from '../../lib/db';
+import { KycService } from './kyc.service';
+import { AuthenticatedRequest } from '../../middleware/auth';
 
-// ─────────────────────────────────────────────
-// POST /api/v1/kyc/pan/verify
-// ─────────────────────────────────────────────
+const kycService = new KycService();
 
 const panSchema = z.object({
   pan: z.string().length(10),
   name: z.string().min(3),
 });
 
-export async function verifyPanRoute(req: NextRequest): Promise<NextResponse> {
-  return withAuth(req, async (authed: AuthenticatedRequest) => {
-    const body = panSchema.safeParse(await req.json());
-    if (!body.success) return NextResponse.json({ success: false, error: 'Invalid input' }, { status: 400 });
+export class KycController {
+  static async verifyPanRoute(req: NextRequest, authed: AuthenticatedRequest): Promise<NextResponse> {
+    try {
+      const body = panSchema.safeParse(await req.json());
+      if (!body.success) return NextResponse.json({ success: false, error: 'Invalid input' }, { status: 400 });
 
-    const { pan, name } = body.data;
-    const result = await verifyPAN(pan, name);
-
-    if (result.verified) {
-      const { encrypt } = await import('@kiraaya/security');
-      await db.user.update({
-        where: { id: authed.userId },
-        data: {
-          kycStatus: 'pan_verified',
-          panEncrypted: encrypt(pan),
-          panLast4: pan.slice(-4),
-        },
-      });
+      const result = await kycService.verifyPan(authed.userId, body.data.pan, body.data.name);
+      return NextResponse.json({ success: true, data: result });
+    } catch (err: any) {
+      return NextResponse.json({ success: false, error: 'Server error' }, { status: 500 });
     }
+  }
 
-    return NextResponse.json({ success: true, data: result });
-  }, ['tenant', 'landlord']);
+  static async initAadhaarRoute(req: NextRequest, authed: AuthenticatedRequest): Promise<NextResponse> {
+    try {
+      const callbackUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/kyc/callback`;
+      const result = await kycService.initAadhaar(authed.userId, authed.userPhone ?? '', callbackUrl);
+      return NextResponse.json({ success: true, data: result });
+    } catch (err: any) {
+      return NextResponse.json({ success: false, error: 'Server error' }, { status: 500 });
+    }
+  }
 }
 
-// ─────────────────────────────────────────────
-// POST /api/v1/kyc/aadhaar/init
-// ─────────────────────────────────────────────
-
-export async function initAadhaarRoute(req: NextRequest): Promise<NextResponse> {
-  return withAuth(req, async (authed: AuthenticatedRequest) => {
-    const result = await initAadhaarKYC(
-      authed.userId,
-      authed.userPhone,
-      `${process.env.NEXT_PUBLIC_APP_URL}/kyc/callback`
-    );
-    return NextResponse.json({ success: true, data: result });
-  }, ['tenant', 'landlord']);
-}
